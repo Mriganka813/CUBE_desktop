@@ -14,6 +14,7 @@ import 'package:shopos/src/widgets/product_card_horizontal.dart';
 class ProductListPageArgs {
   final bool isSelecting;
   final OrderType orderType;
+
   const ProductListPageArgs({
     required this.isSelecting,
     required this.orderType,
@@ -24,6 +25,7 @@ class ProductsListPage extends StatefulWidget {
   /// Will be used to check if user is
   /// selecting products instead of viewing them
   final ProductListPageArgs? args;
+
   const ProductsListPage({
     Key? key,
     this.args,
@@ -130,73 +132,62 @@ class _ProductsListPageState extends State<ProductsListPage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 70),
-              child: ListView(
-                padding: const EdgeInsets.all(20),
-                shrinkWrap: true,
-                children: [
-                  const Divider(color: Colors.transparent),
-                  BlocBuilder<ProductCubit, ProductState>(
-                    bloc: _productCubit,
-                    builder: (context, state) {
-                      if (state is ProductsListRender) {
-                        return ListView.separated(
-                          physics: const ClampingScrollPhysics(),
-                          itemCount: state.products.length,
-                          shrinkWrap: true,
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(height: 5);
-                          },
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                _selectProduct(state.products[index]);
-                              },
-                              child: Stack(
-                                children: [
-                                  ProductCardHorizontal(
-                                    product: state.products[index],
-                                    onDelete: () {
-                                      _productCubit
-                                          .deleteProduct(state.products[index]);
-                                    },
-                                    onEdit: () async {
-                                      await Navigator.pushNamed(
-                                        context,
-                                        CreateProduct.routeName,
-                                        arguments: state.products[index].id,
-                                      );
-                                      _productCubit.getProducts();
-                                    },
-                                  ),
-                                  if (_products.contains(state.products[index]))
-                                    const Align(
-                                      alignment: Alignment.topRight,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: CircleAvatar(
-                                          radius: 15,
-                                          backgroundColor: Colors.green,
-                                          child: Icon(
-                                            Icons.check,
-                                            color: Colors.white,
-                                          ),
+              child: BlocBuilder<ProductCubit, ProductState>(
+                bloc: _productCubit,
+                builder: (context, state) {
+                  if (state is ProductsListRender) {
+                    return GridView.builder(
+                        itemCount: state.products.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, mainAxisExtent: 230),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              _selectProduct(state.products[index]);
+                            },
+                            child: Stack(
+                              children: [
+                                ProductCardHorizontal(
+                                  product: state.products[index],
+                                  onDelete: () {
+                                    _productCubit
+                                        .deleteProduct(state.products[index]);
+                                  },
+                                  onEdit: () async {
+                                    await Navigator.pushNamed(
+                                      context,
+                                      CreateProduct.routeName,
+                                      arguments: state.products[index].id,
+                                    );
+                                    _productCubit.getProducts();
+                                  },
+                                ),
+                                if (_products.contains(state.products[index]))
+                                  const Align(
+                                    alignment: Alignment.topRight,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: CircleAvatar(
+                                        radius: 15,
+                                        backgroundColor: Colors.green,
+                                        child: Icon(
+                                          Icons.check,
+                                          color: Colors.white,
                                         ),
                                       ),
-                                    )
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      }
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: ColorsConst.primaryColor,
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                                    ),
+                                  )
+                              ],
+                            ),
+                          );
+                        });
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: ColorsConst.primaryColor,
+                    ),
+                  );
+                },
               ),
             ),
             Padding(
