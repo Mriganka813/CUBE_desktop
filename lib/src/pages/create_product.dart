@@ -389,7 +389,7 @@ class _CreateProductState extends State<CreateProduct> {
                         VerticalDivider(),
                         gstSwitch
                             ? Text(
-                                "GST Detail",
+                                "GST Details",
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6
