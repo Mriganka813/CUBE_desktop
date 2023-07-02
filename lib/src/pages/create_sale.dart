@@ -70,10 +70,10 @@ class _CreateSaleState extends State<CreateSale> {
                       ),
                     )
                   : GridView.builder(
-                physics: ClampingScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, mainAxisExtent: 200),
-                itemCount: _orderItems.length,
+                      physics: ClampingScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, mainAxisExtent: 200),
+                      itemCount: _orderItems.length,
                       itemBuilder: (context, index) {
                         final _orderItem = _orderItems[index];
                         final product = _orderItems[index].product!;
@@ -97,7 +97,6 @@ class _CreateSaleState extends State<CreateSale> {
                           productQuantity: _orderItem.quantity,
                         );
                       },
-
                     ),
             ),
             const Divider(color: Colors.transparent),
@@ -134,43 +133,39 @@ class _CreateSaleState extends State<CreateSale> {
                 //   color: Colors.transparent,
                 //   width: 10,
                 // ),
-                CustomContinueButton(title: "Continue", onTap: () {
-                  if (_orderItems.isEmpty)
-                  {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        backgroundColor: Colors.red,
-                        content: Text(
-                          "Please select products before continuing",
-                          style: TextStyle(color: Colors.white),
+                CustomContinueButton(
+                  title: "Continue",
+                  onTap: () {
+                    if (_orderItems.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            "Please select products before continuing",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                  else
-                  {
-                    Navigator.pushNamed(
-                      context,
-                      CheckoutPage.routeName,
-                      arguments: CheckoutPageArgs(
-                        invoiceType: OrderType.sale,
-                        orderInput: _orderInput,
-                      ),
-                    );
-                  }
-                },),CustomButton(
-                  title: "Scan barcode",
-                  onTap: () async {
-                    _searchProductByBarcode();
+                      );
+                    } else {
+                      Navigator.pushNamed(
+                        context,
+                        CheckoutPage.routeName,
+                        arguments: CheckoutPageArgs(
+                          invoiceType: OrderType.sale,
+                          orderInput: _orderInput,
+                        ),
+                      );
+                    }
                   },
+                ),
+                CustomButton(
+                  title: "Scan barcode",
+                  onTap: () async {},
                   type: ButtonType.outlined,
                 ),
               ],
             ),
             const Divider(color: Colors.transparent),
-
-
-
           ],
         ),
       ),

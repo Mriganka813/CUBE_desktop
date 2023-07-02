@@ -23,7 +23,7 @@ class CustomContinueButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-        minimumSize: Size(240, 60),
+        minimumSize: Size(300, 60),
         backgroundColor: Colors.green,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
@@ -42,7 +42,7 @@ class CustomContinueButton extends StatelessWidget {
                   Theme.of(context).textTheme.headline6?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 25),
+                      fontSize: 30),
             ),
     );
   }

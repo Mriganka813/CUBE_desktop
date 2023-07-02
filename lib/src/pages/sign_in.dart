@@ -248,7 +248,7 @@ class _SignInPageState extends State<SignInPage> {
                     Container(
                         height: media.size.height * 0.8,
                         width: media.size.width * 0.6,
-                        child: Image.asset('assets/images/signin_desktop.jpg')),
+                        child: Image.asset('assets/images/image.jpg')),
                   ],
                 ),
               ),
