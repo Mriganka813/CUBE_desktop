@@ -18,7 +18,7 @@ class ProductCardHorizontal extends StatelessWidget {
     this.isSelecting = false,
     this.addQuantity,
     this.reduceQuantity,
-    this.selectQuantity = 0,
+    this.selectQuantity = 0
   }) : super(key: key);
 
   @override
@@ -230,10 +230,10 @@ class ProductCardPurchase extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+
           children: [
             Expanded(
-              flex: 2,
+              flex: 0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -288,7 +288,7 @@ class ProductCardPurchase extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width / 2.25,
+                          width: MediaQuery.of(context).size.width / 3.0,
                           alignment: Alignment.center,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,

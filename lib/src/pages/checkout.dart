@@ -499,7 +499,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  TypeAheadFormField<Party>(
+                                  SizedBox(width: 400,child: TypeAheadFormField<Party>(
+
                                     validator: (value) {
                                       final isEmpty =
                                           (value == null || value.isEmpty);
@@ -511,6 +512,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       }
                                       return null;
                                     },
+
                                     debounceDuration:
                                         const Duration(milliseconds: 500),
                                     textFieldConfiguration:
@@ -568,7 +570,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       _typeAheadController.text =
                                           party.name ?? "";
                                     },
-                                  ),
+                                  ),),
                                   const Divider(
                                       color: Colors.transparent, height: 5),
                                   const Divider(
@@ -593,9 +595,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     },
                                     hintText: "Mode of payment",
                                   ),
-                                  const Spacer(),
-                                  Row(
-                                    children: [
+
+                                  const Divider(color: Colors.transparent,height: 50),
+
                                       CustomButton(
                                         title: "Share",
                                         onTap: () async {
@@ -615,22 +617,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                           vertical: 10,
                                         ),
                                       ),
-                                      const Spacer(),
-                                      TextButton(
-                                        onPressed: () {
-                                          _onTapSubmit();
-                                        },
-                                        style: TextButton.styleFrom(
-                                          backgroundColor:
-                                              Color.fromARGB(255, 0, 249, 95),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                          ),
-                                          padding: const EdgeInsets.all(10),
-                                        ),
-                                        child: Text("Save"),
-                                      ),
+                                  const Divider(color: Colors.transparent,height: 50),
+
+
+                                      CustomButton(title: "Save", onTap: () {
+                                        _onTapSubmit();
+                                      },),
+
                                       // TextButton(
                                       //   onPressed: () {
                                       //     _onTapSubmit();
@@ -643,10 +636,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       //     Icons.arrow_forward_rounded,
                                       //     size: 40,
                                       //     color: Colors.white,
-                                      //   ),
+                                      //   )
                                       // )
-                                    ],
-                                  )
+
                                 ],
                               ),
                             ),

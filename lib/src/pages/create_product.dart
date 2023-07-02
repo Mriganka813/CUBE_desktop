@@ -26,6 +26,7 @@ import '../blocs/product/product_cubit.dart';
 class CreateProduct extends StatefulWidget {
   static const String routeName = '/create-product';
   final String? id;
+
   const CreateProduct({Key? key, this.id}) : super(key: key);
 
   @override
@@ -250,7 +251,7 @@ class _CreateProductState extends State<CreateProduct> {
               bloc: _productCubit,
               builder: (context, state) {
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
                       "Add Image",
@@ -265,7 +266,7 @@ class _CreateProductState extends State<CreateProduct> {
                         _showImagePickerOptions();
                       },
                       child: SizedBox(
-                        height: 160,
+                        height: 140,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: Stack(
@@ -312,18 +313,17 @@ class _CreateProductState extends State<CreateProduct> {
                       ),
                     ),
                     const Divider(color: Colors.transparent),
-                    CustomTextField(
-                      label: "Name",
-                      value: _formInput.name,
-                      onChanged: (e) {
-                        _formInput.name = e;
-                      },
-                    ),
-                    const Divider(color: Colors.transparent),
                     Row(
                       children: [
-                        Expanded(
-                          child: CustomTextField(
+                        CustomTextField(
+                          label: "Name",
+                          value: _formInput.name,
+                          onChanged: (e) {
+                            _formInput.name = e;
+                          },
+                        ),
+                        const VerticalDivider(color: Colors.transparent),
+                       CustomTextField(
                             label: "Selling Price",
                             value: _formInput.sellingPrice,
                             inputType: TextInputType.number,
@@ -331,10 +331,13 @@ class _CreateProductState extends State<CreateProduct> {
                               _formInput.sellingPrice = e;
                             },
                           ),
-                        ),
-                        const VerticalDivider(color: Colors.transparent),
-                        Expanded(
-                          child: CustomTextField(
+
+                      ],
+                    ),
+                    const Divider(color: Colors.transparent),
+                    Row( 
+                      children: [
+                      CustomTextField(
                             label: "Purchase Price",
                             value: _formInput.purchasePrice != "null"
                                 ? _formInput.purchasePrice
@@ -345,32 +348,32 @@ class _CreateProductState extends State<CreateProduct> {
                             },
                             validator: (e) => null,
                           ),
+                        const VerticalDivider(color: Colors.transparent),
+                        CustomDatePicker(
+                          label: 'Expiry Date',
+                          hintText: 'Select expiry date',
+                          onChanged: (DateTime value) {
+                            setState(() {
+                              _formInput.expirydate =
+                                  DateFormat('dd/MM/yyyy').format(value);
+                            });
+                          },
+                          onSave: (DateTime? value) {},
+                          value: _formInput.expirydate != null &&
+                              _formInput.expirydate!.isNotEmpty
+                              ? DateFormat('dd/MM/yyyy')
+                              .parse(_formInput.expirydate!)
+                              : null,
+                          validator: (DateTime? value) => null,
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime.now().add(Duration(days: 365 * 3)),
                         ),
                       ],
                     ),
                     const Divider(color: Colors.transparent),
-                    CustomDatePicker(
-                      label: 'Expiry Date',
-                      hintText: 'Select expiry date',
-                      onChanged: (DateTime value) {
-                        setState(() {
-                          _formInput.expirydate =
-                              DateFormat('dd/MM/yyyy').format(value);
-                        });
-                      },
-                      onSave: (DateTime? value) {},
-                      value: _formInput.expirydate != null &&
-                              _formInput.expirydate!.isNotEmpty
-                          ? DateFormat('dd/MM/yyyy')
-                              .parse(_formInput.expirydate!)
-                          : null,
-                      validator: (DateTime? value) => null,
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(Duration(days: 365 * 3)),
-                    ),
-                    const Divider(color: Colors.transparent),
+
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+
                       children: [
                         Switcher(
                           value: false,
@@ -408,7 +411,9 @@ class _CreateProductState extends State<CreateProduct> {
                     Visibility(
                       visible: !gstSwitch,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(children: [
                           const Divider(color: Colors.transparent),
                           CustomTextField(
                             label: "GST Rate (%)",
@@ -422,6 +427,8 @@ class _CreateProductState extends State<CreateProduct> {
                               if (!gstSwitch && e == "") return "Enter Rate";
                             },
                           ),
+                          const VerticalDivider(color: Colors.transparent),
+
                           const Divider(color: Colors.transparent),
                           Row(
                             children: [
@@ -471,7 +478,7 @@ class _CreateProductState extends State<CreateProduct> {
                               _formInput.baseSellingPriceGst = e;
                             },
                             validator: (e) => null,
-                          ),
+                          ),],),
                           const Divider(color: Colors.transparent),
                           CustomTextField(
                             readonly: true,
@@ -486,6 +493,7 @@ class _CreateProductState extends State<CreateProduct> {
                       ),
                     ),
                     const Divider(color: Colors.transparent),
+                    Row(children: [
                     CustomTextField(
                       label: "Quantity",
                       value: _formInput.quantity,
@@ -494,31 +502,25 @@ class _CreateProductState extends State<CreateProduct> {
                         _formInput.quantity = e;
                       },
                     ),
+                      const VerticalDivider(color: Colors.transparent),
                     const Divider(color: Colors.transparent),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: CustomTextField(
-                            label: "Barcode",
-                            value: _formInput.barCode != "null"
-                                ? _formInput.barCode
-                                : "",
-                            onChanged: (e) {
-                              _formInput.barCode = e;
-                            },
-                            validator: (e) => null,
-                          ),
-                        ),
-                        const VerticalDivider(color: Colors.transparent),
-                        IconButton(
-                          onPressed: () async {
-                            _scanBarode();
-                            // Check if the device can vibrate
-                          },
-                          icon: const Icon(CustomIcons.camera),
-                        )
-                      ],
+                    CustomTextField(
+                      label: "Barcode",
+                      value: _formInput.barCode != "null"
+                          ? _formInput.barCode
+                          : "",
+                      onChanged: (e) {
+                        _formInput.barCode = e;
+                      },
+                      validator: (e) => null,
+                    ),],),
+                    const Divider(color: Colors.transparent, height: 40),
+                    IconButton(
+                      onPressed: () async {
+                        _scanBarode();
+                        // Check if the device can vibrate
+                      },
+                      icon: const Icon(CustomIcons.camera),
                     ),
                     const Divider(color: Colors.transparent, height: 40),
                     CustomButton(
@@ -557,5 +559,6 @@ class _CreateProductState extends State<CreateProduct> {
     setState(() {
       _formInput.barCode = res;
     });
- */ }
+ */
+  }
 }

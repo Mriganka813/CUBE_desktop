@@ -19,8 +19,8 @@ class User {
 
   String? email;
   String? password;
-  String? address;
-  String? role;
+  Object? address;
+  Object? role;
   String? businessName;
   String? businessType;
   int? phoneNumber;

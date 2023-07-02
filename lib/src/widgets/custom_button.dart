@@ -27,8 +27,9 @@ class CustomButton extends StatelessWidget {
     return TextButton(
       style: type == ButtonType.outlined
           ? OutlinedButton.styleFrom(
+              minimumSize: Size(240, 60),
               side: BorderSide(
-                color: isDisabled ? Colors.grey : ColorsConst.primaryColor,
+                color: isDisabled ? Colors.green : ColorsConst.primaryColor,
                 width: 2,
               ),
               shape: RoundedRectangleBorder(
@@ -37,8 +38,9 @@ class CustomButton extends StatelessWidget {
               padding: padding,
             )
           : TextButton.styleFrom(
+              minimumSize: Size(240, 60),
               backgroundColor:
-                  isDisabled ? Colors.grey : ColorsConst.primaryColor,
+                  isDisabled ? Colors.green : ColorsConst.primaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -50,15 +52,15 @@ class CustomButton extends StatelessWidget {
       },
       child: isLoading
           ? const CircularProgressIndicator()
-          : Text(
-              title,
-              style: style ??
-                  Theme.of(context).textTheme.headline6?.copyWith(
-                        color: type == ButtonType.normal
-                            ? Colors.white
-                            : ColorsConst.primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+          : Center(
+              child: Text(title,
+                  style: style ??
+                      Theme.of(context).textTheme.headline6?.copyWith(
+                          color: type == ButtonType.normal
+                              ? Colors.white
+                              : ColorsConst.primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25)),
             ),
     );
   }

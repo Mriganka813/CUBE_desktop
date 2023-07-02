@@ -51,9 +51,10 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Create ${widget.args.partyType} party'),
+        title: Text('Create ${widget.args.partyType} part'),
       ),
       body: BlocListener<PartyCubit, PartyState>(
         bloc: _partyCubit,
@@ -75,7 +76,7 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+
                   children: [
                     const SizedBox(height: 20),
                     CustomTextField(
@@ -119,6 +120,7 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
                       },
                     ),
                     const Spacer(),
+
                     CustomButton(
                       title: "Save",
                       isLoading: isLoading,
@@ -131,7 +133,7 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
                         }
                       },
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 40,width: 10,),
                   ],
                 ),
               ),

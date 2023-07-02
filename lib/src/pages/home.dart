@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        subtitle: Text(state.user.address ?? ""),
+                        subtitle: Text(state.user.email ?? ""),
                       ),
                       Divider(),
                       ListTile(

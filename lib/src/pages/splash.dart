@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> authStatus() async {
     final cj = await const ApiV1Service().initCookiesManager();
     final cookies = await cj.loadForRequest(Uri.parse(Const.apiUrl));
-    final isAuthenticated = cookies.isNotEmpty;
+    final isAuthenticated = cookies.isEmpty;
     Future.delayed(
       const Duration(milliseconds: 6000),
       () => Navigator.pushReplacementNamed(

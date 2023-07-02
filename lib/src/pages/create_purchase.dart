@@ -5,11 +5,13 @@ import 'package:shopos/src/pages/checkout.dart';
 import 'package:shopos/src/pages/create_product.dart';
 import 'package:shopos/src/pages/products_list.dart';
 import 'package:shopos/src/widgets/custom_button.dart';
+import 'package:shopos/src/widgets/custom_continue_button.dart';
 import 'package:shopos/src/widgets/product_card_horizontal.dart';
 import 'package:slidable_button/slidable_button.dart';
 
 class CreatePurchase extends StatefulWidget {
   static const routeName = '/create_purchase';
+
   const CreatePurchase({Key? key}) : super(key: key);
 
   @override
@@ -51,9 +53,10 @@ class _CreatePurchaseState extends State<CreatePurchase> {
                         'No products added yet',
                       ),
                     )
-                  : ListView.separated(
-                      physics: const ClampingScrollPhysics(),
-                      shrinkWrap: true,
+                  : GridView.builder(
+                      physics: ClampingScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, mainAxisExtent: 200),
                       itemCount: _orderItems.length,
                       itemBuilder: (context, index) {
                         final _orderItem = _orderItems[index];
@@ -75,9 +78,6 @@ class _CreatePurchaseState extends State<CreatePurchase> {
                           },
                           productQuantity: _orderItem.quantity,
                         );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const Divider(color: Colors.transparent);
                       },
                     ),
             ),
@@ -116,68 +116,40 @@ class _CreatePurchaseState extends State<CreatePurchase> {
                   //   color: Colors.transparent,
                   //   width: 10,
                   // ),
-                  CustomButton(
+                    CustomContinueButton(title: "Continue", onTap: () {
+                    if (_orderItems.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            "Please select products before continuing",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                    } else {
+                      Navigator.pushNamed(
+                        context,
+                        CheckoutPage.routeName,
+                        arguments: CheckoutPageArgs(
+                          invoiceType: OrderType.purchase,
+                          orderInput: _orderInput,
+                        ),
+                      );
+                    }
+                  },),CustomButton(
                     title: "Create Product",
                     onTap: () {
                       Navigator.pushNamed(context, CreateProduct.routeName);
                     },
                     type: ButtonType.outlined,
-                  ),
+                  )
                 ],
               ),
             ),
             const Divider(color: Colors.transparent),
-            SlidableButton(
-              width: double.maxFinite,
-              buttonWidth: 100.0,
-              color: Colors.green,
-              isRestart: true,
-              buttonColor: Colors.white24,
-              dismissible: false,
-              label: const Center(
-                child: Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.white,
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Swipe to continue",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge
-                        ?.copyWith(color: Colors.white),
-                  ),
-                ],
-              ),
-              height: 50,
-              onChanged: (position) {
-                if (position == SlidableButtonPosition.right) {
-                  if (_orderItems.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        backgroundColor: Colors.red,
-                        content: Text(
-                          "Please select products before continuing",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    );
-                    return;
-                  }
-                  Navigator.pushNamed(
-                    context,
-                    CheckoutPage.routeName,
-                    arguments: CheckoutPageArgs(
-                      invoiceType: OrderType.purchase,
-                      orderInput: _orderInput,
-                    ),
-                  );
-                }
-              },
-            ),
+
+
           ],
         ),
       ),

@@ -53,22 +53,17 @@ class _ExpensePageState extends State<ExpensePage> {
           ),
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(20),
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        children: [
+      body: Padding(
+      padding: const EdgeInsets.only(top: 10,right:10,left: 10),
+    child:
           BlocBuilder<ExpenseCubit, ExpenseState>(
             bloc: _expenseCubit,
             builder: (context, state) {
               if (state is ExpenseListRender) {
-                return ListView.separated(
-                  physics: const ClampingScrollPhysics(),
+                return GridView.builder(
                   itemCount: state.expense.length,
-                  shrinkWrap: true,
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 5);
-                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, mainAxisExtent: 160),
                   itemBuilder: (context, index) {
                     return ExpenseCardHorizontal(
                       expense: state.expense[index],
@@ -96,9 +91,8 @@ class _ExpensePageState extends State<ExpensePage> {
               );
             },
           ),
-          const SizedBox(height: 80),
-        ],
-      ),
-    );
+
+      ));
+
   }
 }

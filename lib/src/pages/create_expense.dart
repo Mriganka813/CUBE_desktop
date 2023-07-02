@@ -97,7 +97,7 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+
                         children: [
                           const SizedBox(height: 20),
                           CustomTextField(
@@ -132,6 +132,7 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
                           ),
                           const Divider(color: Colors.transparent, height: 20),
                           CustomDropDownField(
+
                             items: const ['Cash', 'Bank Transfer'],
                             onSelected: (e) {
                               _formInput.modeOfPayment = e;
