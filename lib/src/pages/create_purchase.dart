@@ -116,7 +116,7 @@ class _CreatePurchaseState extends State<CreatePurchase> {
                   //   color: Colors.transparent,
                   //   width: 10,
                   // ),
-                    CustomContinueButton(title: "Continu", onTap: () {
+                    CustomContinueButton(title: "Continue", onTap: () {
                     if (_orderItems.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
