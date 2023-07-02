@@ -24,10 +24,12 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
+    return SizedBox(width: 400,child: DropdownButtonFormField<String>(
+
       items: widget.items.map(
-        (e) {
+            (e) {
           return DropdownMenuItem(
+
             value: e,
             child: Text(e),
           );
@@ -51,6 +53,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
         return null;
       },
       value: _selected ?? widget.initialValue,
+
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
           vertical: 2,
@@ -61,6 +64,6 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
         ),
         hintText: widget.hintText,
       ),
-    );
+    ),);
   }
 }

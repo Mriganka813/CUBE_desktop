@@ -95,7 +95,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-            ),
+            ),constraints: BoxConstraints(maxWidth: 400)
           ),
         ),
       ],

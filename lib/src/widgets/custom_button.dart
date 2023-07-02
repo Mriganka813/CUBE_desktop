@@ -26,42 +26,40 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: type == ButtonType.outlined
-          ? OutlinedButton.styleFrom(
-              minimumSize: Size(240, 60),
-              side: BorderSide(
-                color: isDisabled ? Colors.green : ColorsConst.primaryColor,
-                width: 2,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: padding,
-            )
-          : TextButton.styleFrom(
-              minimumSize: Size(240, 60),
-              backgroundColor:
-                  isDisabled ? Colors.green : ColorsConst.primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: padding,
-            ),
+          ? OutlinedButton.styleFrom(minimumSize: Size(300, 60),
+        side: BorderSide(
+          color: isDisabled ? Colors.green : ColorsConst.primaryColor,
+          width: 2,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: padding,
+      )
+          : TextButton.styleFrom(minimumSize: Size(300, 60),
+        backgroundColor:
+        isDisabled ? Colors.green : ColorsConst.primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: padding,
+      ),
       onPressed: () {
         if (isDisabled) return;
         onTap();
       },
       child: isLoading
           ? const CircularProgressIndicator()
-          : Center(
-              child: Text(title,
-                  style: style ??
-                      Theme.of(context).textTheme.headline6?.copyWith(
-                          color: type == ButtonType.normal
-                              ? Colors.white
-                              : ColorsConst.primaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25)),
-            ),
+          : Text(
+          title,
+          style: style ??
+              Theme.of(context).textTheme.headline6?.copyWith(
+                  color: type == ButtonType.normal
+                      ? Colors.white
+                      : ColorsConst.primaryColor,
+                  fontWeight: FontWeight.bold,fontSize: 35
+              )
+      ),
     );
   }
 }
