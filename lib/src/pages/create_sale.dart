@@ -178,7 +178,7 @@ class _CreateSaleState extends State<CreateSale> {
     );
   }
 
-  ///
+  //
   Future<void> _searchProductByBarcode() async {
     locator<GlobalServices>().showBottomSheetLoader();
     final barcode = await FlutterBarcodeScanner.scanBarcode(

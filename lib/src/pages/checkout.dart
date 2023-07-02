@@ -636,7 +636,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       //     Icons.arrow_forward_rounded,
                                       //     size: 40,
                                       //     color: Colors.white,
-                                      //   ),
+                                      //   )
                                       // )
 
                                 ],

@@ -54,7 +54,7 @@ class _CreatePartyPageState extends State<CreatePartyPage> {
 
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Create ${widget.args.partyType} party'),
+        title: Text('Create ${widget.args.partyType} part'),
       ),
       body: BlocListener<PartyCubit, PartyState>(
         bloc: _partyCubit,
