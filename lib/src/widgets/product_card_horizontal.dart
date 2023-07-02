@@ -18,7 +18,7 @@ class ProductCardHorizontal extends StatelessWidget {
     this.isSelecting = false,
     this.addQuantity,
     this.reduceQuantity,
-    this.selectQuantity = 0,
+    this.selectQuantity = 0
   }) : super(key: key);
 
   @override
