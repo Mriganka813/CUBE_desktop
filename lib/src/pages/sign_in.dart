@@ -99,7 +99,7 @@ class _SignInPageState extends State<SignInPage> {
                       child: Container(
                         width: media.size.width * 0.25,
                         height: media.size.height * 0.8,
-                        child: Column(
+                        child: Padding(padding: EdgeInsets.all(MediaQuery.of(context).size.width/40),child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -112,9 +112,9 @@ class _SignInPageState extends State<SignInPage> {
                                     .textTheme
                                     .headline3
                                     ?.copyWith(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                ),
                               ),
                             ),
                             const Align(
@@ -122,7 +122,7 @@ class _SignInPageState extends State<SignInPage> {
                               child: Text(
                                 "Enter your credentials to access your account",
                                 style:
-                                    TextStyle(color: Colors.grey, fontSize: 25),
+                                TextStyle(color: Colors.grey, fontSize: 25),
                               ),
                             ),
                             const SizedBox(height: 40),
@@ -142,9 +142,9 @@ class _SignInPageState extends State<SignInPage> {
                                       .textTheme
                                       .headline6
                                       ?.copyWith(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                      ),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                                 ),
                                 const Spacer(),
                                 GestureDetector(
@@ -160,9 +160,9 @@ class _SignInPageState extends State<SignInPage> {
                                         .textTheme
                                         .headline6
                                         ?.copyWith(
-                                          color: ColorsConst.primaryColor,
-                                          fontWeight: FontWeight.normal,
-                                        ),
+                                      color: ColorsConst.primaryColor,
+                                      fontWeight: FontWeight.normal,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -203,9 +203,9 @@ class _SignInPageState extends State<SignInPage> {
                                       .textTheme
                                       .headline6
                                       ?.copyWith(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ],
                             ),
@@ -242,7 +242,8 @@ class _SignInPageState extends State<SignInPage> {
                             //   title: 'Sign Up',
                             // ),
                           ],
-                        ),
+                        ) ,),
+                       
                       ),
                     ),
                     Container(
