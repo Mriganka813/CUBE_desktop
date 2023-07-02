@@ -45,7 +45,7 @@ class CustomContinueButton extends StatelessWidget {
             Theme.of(context).textTheme.headline6?.copyWith(
                 color: Colors.white,
 
-                fontWeight: FontWeight.bold,fontSize: 35
+                fontWeight: FontWeight.bold,fontSize: 45
             ),
       ),
     );
